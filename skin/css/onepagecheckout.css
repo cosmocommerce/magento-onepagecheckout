@@ -230,3 +230,70 @@ filter: alpha(opacity = 30);-ms-filter: "progid:DXImageTransform.Microsoft.Alpha
 	color:#F18200;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+shoppper override
+*/
+/* ********************* */
+/* OPC: Addition */
+/* ********************* */
+body.onepagecheckout-index-index .col-main {padding: 5px 0;}
+body.onepagecheckout-index-index .page-title {padding: 8px 0; border: none ! important;}
+body.onepagecheckout-index-index .h1_opc {margin-bottom: 2px; font-family: "Open Sans";}
+body.onepagecheckout-index-index .op_block_title {margin: 10px 0 20px; font-size: 22px; font-weight: 400; font-family: "Open Sans"; text-transform: uppercase; letter-spacing: -1.2px; line-height: 22px; text-align: center; border: none ! important; color: rgba(0,0,0,0.75);}
+.onepagecheckout_loginarea {margin: 8px 0;}
+#onepagecheckout_orderform .col-1 .form_fields div.full,
+#onepagecheckout_orderform .col-1 .form_fields div.two_fields .short {margin-bottom: 8px ! important}
+/* OPC: Input fields adjusted to theme */
+#onepagecheckout_orderform .form_fields input.t1, textarea { padding: 4px; border: 1px solid #e0e0e0; height: 19px; box-shadow: inset 0px 0px 5px 0px #eaeaea; border-radius: 2px;}
+#onepagecheckout_orderform .form_fields input.t1, textarea {-webkit-box-shadow: inset 0px 0px 5px 0px #eaeaea;-moz-box-shadow: inset 0px 0px 5px 0px #eaeaea;-webkit-border-radius: 2px;-moz-border-radius: 2px;}
+#onepagecheckout_orderform .form_fields sup {top: 0px ! important}
+/* OPC: blocks + coupon form adjusted to theme */
+#checkout-coupon-discount-load, .onepagecheckout_block {padding: 10px; margin: 5px 0; border-top: 6px solid #97d2c9; border-radius: 2px; box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.10); background: #fff} 
+#checkout-coupon-discount-load, .onepagecheckout_block {-webkit-border-radius: 2px;-moz-border-radius: 2px;-webkit-box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.10);-moz-box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.10);}
+/* TODO: Needs to be moved to php.css to capture colour from settings */
+#checkout-coupon-discount-load, .onepagecheckout_block {border-top-color: #f85506;}
+.ptdivline {display: none}
+/* OPC: coupon button adjustments */
+#checkout-coupon-discount-load button.button span {height: 28px}
+#checkout-coupon-discount-load button.button span span {line-height: 27px;}
+#checkout-coupon-discount-load .discount-form label {display: block}
+#checkout-coupon-discount-load .input-box {display: inline; float: left;}
+#checkout-coupon-discount-load .buttons-set {display: inline; float: left; margin: 0 0 0 6px ! important; padding: 0 ! important; clear: none}
+#checkout-coupon-discount-load:after {content: ".";display: block;clear: both;visibility: hidden;line-height: 0;height: 0;}
+/* OPC: checkout button */
+#onepagecheckout_orderform button.button.btn-checkout {font-size: 12px; text-transform: uppercase; padding: 0 20px; background: none; height: 32px !important;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px; box-shadow: none; -webkit-box-shadow: none; -moz-box-shadow: none;}
+/* TODO: Needs to be moved to php.css to capture colour from settings */
+#onepagecheckout_orderform button.button.btn-checkout {background-color: #f85506;}
+/* OPC: Errormessages are too large */
+#onepagecheckout_orderform .error-msg, #onepagecheckout_orderform .success-msg, 
+#onepagecheckout_orderform .note-msg, #onepagecheckout_orderform .notice-msg {padding: 5px ! important;padding-left: 40px ! important;background-position: 4px 4px ! important;font-size: 14px ! important;}
+/* OPC: Checkout table */
+/* #onepagecheckout_orderform .item-options {overflow: visible;white-space: nowrap;  max-width: 100px;}
+#onepagecheckout_orderform .item-options dd {float: none} */
+
+/***** iPhone (portrait and landscape) *****/
+/***** TODO: OK for Android and other devices? *****/
+@media only screen and (max-width: 767px) {
+  #onepagecheckout_orderform .col3-set,
+	#onepagecheckout_orderform .col-1,
+	#onepagecheckout_orderform .col-2,
+	#onepagecheckout_orderform .col-3 {width: 300px ! important; margin: 0px ! important; min-height: auto ! important;}
+}
+
+/* ********************* */
+/* OPC: Onepage Checkout */
+/* ********************* */
