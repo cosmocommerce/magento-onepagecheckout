@@ -13,7 +13,7 @@ background:url("../images/onepagecheckout/cancel.png") no-repeat scroll 0 0 tran
 background:url("../images/onepagecheckout/buttonbgsmall.gif") repeat-x scroll 0 0 #00A7D1;
 -moz-box-shadow: 3px 3px 5px #ccc;-webkit-box-shadow: 3px 3px 5px #ccc;box-shadow: 3px 3px 5px #ccc;}
 .op_login_area button.button span{background:none no-repeat scroll 0 0 transparent;border:0 none;
-color:#FFFFFF;font:bold 12px/20px Arial,Helvetica,sans-serif;height:20px !important;padding:0 0 0 5px;text-transform:uppercase;}
+color:#FFFFFF; height:20px !important;padding:0 0 0 5px;text-transform:uppercase;}
 .op_login_area button.button span span {background-position:100% 0;padding:0 5px 0 0;}
 
 .onepagecheckout-index-index .onepagetitle { margin-bottom: 10px; }
@@ -100,8 +100,8 @@ color:#FFFFFF;font:bold 16px/32px Arial,Helvetica,sans-serif;height:32px !import
 */
 
 #onepagecheckout_orderform button.btn-checkout{border:0;margin-bottom:10px;padding:0 20px;
-background:url("../images/onepagecheckout/buttonbg.gif") repeat-x scroll 0 0 #00A7D1;
-color:#FFFFFF;font:bold 16px/32px Arial,Helvetica,sans-serif;height:32px !important;text-transform:uppercase;
+background:#000000;
+color:#FFFFFF; height:32px !important;text-transform:uppercase;
 box-shadow:0px 0px 8px #555;
 -webkit-box-shadow: 0px 0px 8px #555;
 -moz-box-shadow:0px 0px 8px #555;
@@ -297,3 +297,5 @@ body.onepagecheckout-index-index .op_block_title {margin: 10px 0 20px; font-size
 /* ********************* */
 /* OPC: Onepage Checkout */
 /* ********************* */
+
+#checkout-review-table h3{color:#000;}
