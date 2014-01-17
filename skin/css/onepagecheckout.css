@@ -270,35 +270,6 @@ filter: alpha(opacity = 30);-ms-filter: "progid:DXImageTransform.Microsoft.Alpha
 
 
 
-#onepagecheckout_loginbox #login-form .boxcontent input,
-#onepagecheckout_forgotbox #forgot-password-form .boxcontent input{width:98%;}
-.my-cart-link{float:right; color: #0B3A96; font-weight: bold; font-size:12px !important; text-decoration:none;}
-
-.iwd-verification-title .head{
-    line-height: 1.25em;
-    text-align: right;
-    background: none repeat scroll 0 0 #F9F3E3;
-    border: 1px solid #BBAFA0;
-    margin-bottom: 0;
-    padding: 4px 8px 5px;
-    cursor: default;
-}
-.iwd-verification-title .head h3{
-	line-height:1.3em;
-	text-align:left;
-	margin:0;
-	font-size:1.05em;
-	color:#F18200;
-}
-
-
-
-
-
-
-
-
-
 
 
 

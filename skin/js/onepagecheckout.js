@@ -732,23 +732,11 @@ OPC.Window.prototype = {
 };
 
 function open_login() {
-    //$$('.col-main')[0].getWidth()
-    
-    var windowWidth = $$('.col-main')[0].getWidth();
-    var windowHeight =  $$('.col-main')[0].getHeight();
-    element=$('onepagecheckout_loginbox');
-    element.style.left = ((windowWidth - parseInt(element.getWidth())) / 2) + "px";
-    element.style.top = (100) + "px";
     $('onepagecheckout_forgotbox').hide();
     $('onepagecheckout_loginbox').show();
 }
 
 function open_forgot() {
-    var windowWidth = $$('.col-main')[0].getWidth();
-    var windowHeight =  $$('.col-main')[0].getHeight();
-    element=$('onepagecheckout_forgotbox');
-    element.style.left = ((windowWidth - parseInt(element.getWidth())) / 2) + "px";
-    element.style.top = (100) + "px";
     $('onepagecheckout_loginbox').hide();
     $('onepagecheckout_forgotbox').show();
 }
