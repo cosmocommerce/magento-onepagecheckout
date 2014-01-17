@@ -1,17 +1,18 @@
 <?xml version="1.0"?>
 <config>
-    <tabs>
-        <iwd>
-            <label>IWD</label>
-            <sort_order>200</sort_order>
-        </iwd>
-    </tabs>
+	<tabs>
+		<iwdall translate="label">
+			<label>IWD Extensions</label>
+			<sort_order>210</sort_order>
+			<class>iwd-block</class>
+		</iwdall>
+	</tabs>
     <sections>
         <onepagecheckout translate="label" module="onepagecheckout">
             <label>One Page Checkout</label>
-            <tab>iwd</tab>
+            <tab>iwdall</tab>
             <frontend_type>text</frontend_type>
-            <sort_order>10</sort_order>
+            <sort_order>100</sort_order>
             <show_in_default>1</show_in_default>
             <show_in_website>1</show_in_website>
             <show_in_store>1</show_in_store>
@@ -125,7 +126,7 @@
                         </country>
                         <country_file translate="label comment">
                             <label>GeoIp filename</label>
-                            <comment><![CDATA[<a href='http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz' title='Download GeoIP database'>Download</a> and unzip file under the 'MAGETO_ROOT/lib/MaxMind/GeoIP/data' folder if you don't have it]]></comment>
+                            <comment><![CDATA[<a href='http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz' title='Download GeoIP database'>Download</a> and unzip file under the 'MAGENTO_ROOT/lib/MaxMind/GeoIP/data' folder if you don't have it]]></comment>
                             <frontend_type>text</frontend_type>
                             <sort_order>10</sort_order>
                             <show_in_default>1</show_in_default>
@@ -143,7 +144,7 @@
                         </city>
                         <city_file translate="label comment">
                             <label>GeoCity filename</label>
-                            <comment><![CDATA[<a href='http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz' title='Download GeoCity database'>Download</a> and unzip file under the 'MAGETO_ROOT/lib/MaxMind/GeoIP/data' folder if you don't have it]]></comment>
+                            <comment><![CDATA[<a href='http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz' title='Download GeoCity database'>Download</a> and unzip file under the 'MAGENTO_ROOT/lib/MaxMind/GeoIP/data' folder if you don't have it]]></comment>
                             <frontend_type>text</frontend_type>
                             <sort_order>30</sort_order>
                             <show_in_default>1</show_in_default>

@@ -2,7 +2,7 @@ var OPC = Class.create();
 OPC.prototype = {
     initialize: function (form, urls, agreement) {
         this.in_process = false;
-        this.s_code = 'v2_2_1';
+        this.s_code = 'v2_2_9';
         this.acceptAgreementText = agreement;
         this.successUrl = check_secure_url(urls.success);
         this.saveUrl = check_secure_url(urls.save);
@@ -159,7 +159,12 @@ OPC.prototype = {
             onFailure: this.ajaxFailure.bind(this)
         });
     },
-    update: function (params) {
+    update: function (params) { // need to use timeout for chrome autocomplete
+        setTimeout(function(){
+        	checkout.real_update(params);   
+        },200);
+    },    
+    real_update: function (params) {
         if (this.loadWaiting != false) {
             return;
         }
@@ -177,6 +182,10 @@ OPC.prototype = {
                 }).update('').addClassName('loading');
                 parameters[i] = params[i];
             }
+// special rule if payment method changed
+            if(i=='payment-changed')
+            	parameters[i] = params[i];
+//
         }
         checkout.setLoadWaiting(true);
         var request = new Ajax.Request(this.updateUrl, {

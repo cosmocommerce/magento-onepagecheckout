@@ -1,4 +1,4 @@
-/* v 2.2.1 */
+/* v 2.2.8 */
 .h1_opc{text-transform:uppercase;font-size:22px;color:#000;}
 
 .onepagecheckout_loginarea { margin: 10px 0 20px; }
@@ -13,7 +13,7 @@ background:url("../images/onepagecheckout/cancel.png") no-repeat scroll 0 0 tran
 background:url("../images/onepagecheckout/buttonbgsmall.gif") repeat-x scroll 0 0 #00A7D1;
 -moz-box-shadow: 3px 3px 5px #ccc;-webkit-box-shadow: 3px 3px 5px #ccc;box-shadow: 3px 3px 5px #ccc;}
 .op_login_area button.button span{background:none no-repeat scroll 0 0 transparent;border:0 none;
-color:#FFFFFF; height:20px !important;padding:0 0 0 5px;text-transform:uppercase;}
+color:#FFFFFF;font:bold 12px/20px Arial,Helvetica,sans-serif;height:20px !important;padding:0 0 0 5px;text-transform:uppercase;}
 .op_login_area button.button span span {background-position:100% 0;padding:0 5px 0 0;}
 
 .onepagecheckout-index-index .onepagetitle { margin-bottom: 10px; }
@@ -90,18 +90,10 @@ input, select, textarea, button{color:#000;}
 .onepagecheckout_loginlink{	color:#767676;}
 
 .onepagecheckout_datafields .discount .buttons-set button:first-child{margin-left:0} 
-/*
-#onepagecheckout_orderform button.btn-checkout{float:right;border:1px solid #ccc;margin-bottom:10px;
-background:url("../images/onepagecheckout/buttonbg.gif") repeat-x scroll 0 0 #00A7D1;
--moz-box-shadow: 3px 3px 5px #ccc;-webkit-box-shadow: 3px 3px 5px #ccc;box-shadow: 3px 3px 5px #ccc;}
-#onepagecheckout_orderform button.btn-checkout span {background:none no-repeat scroll 0 0 transparent;border:0 none;
-color:#FFFFFF;font:bold 16px/32px Arial,Helvetica,sans-serif;height:32px !important;padding:0 0 0 20px;text-transform:uppercase;}
-#onepagecheckout_orderform button.btn-checkout span span{background-position:100% 0;padding:0 20px 0 0;}
-*/
 
 #onepagecheckout_orderform button.btn-checkout{border:0;margin-bottom:10px;padding:0 20px;
-background:#000000;
-color:#FFFFFF; height:32px !important;text-transform:uppercase;
+background:url("../images/onepagecheckout/buttonbg.gif") repeat-x scroll 0 0 #00A7D1;
+color:#FFFFFF;font:bold 16px/32px Arial,Helvetica,sans-serif;height:32px !important;text-transform:uppercase;
 box-shadow:0px 0px 8px #555;
 -webkit-box-shadow: 0px 0px 8px #555;
 -moz-box-shadow:0px 0px 8px #555;
@@ -121,10 +113,7 @@ filter: progid:DXImageTransform.Microsoft.dropShadow(color=#555, offX=0, offY=0,
 .order-products-table .even { background:#fff; }
 .order-products-table td.last,
 .order-products-table th.last { border-right:0; width:30%;}
-/*
-.order-products-table tr.last th,
-.order-products-table tr.last td { border-bottom:0 !important; }
-*/
+
 .order-products-table th { padding:3px 8px; font-weight:bold; border-bottom:1px solid #BFBFBF;}
 .order-products-table td { padding:8px 8px 2px;}
 
@@ -160,7 +149,7 @@ filter: progid:DXImageTransform.Microsoft.dropShadow(color=#555, offX=0, offY=0,
 p.agree a{color:#8E8D8B;}
 p.newsletter label{color:#8E8D8B;}
 
-.onepagecheckout-window { border: none; background: #fff; z-index: 999; position: absolute; text-align: left; }
+.onepagecheckout-window { border: none; background: #fff; z-index: 99999; position: absolute; text-align: left; }
 .onepagecheckout-window .page-title span { color:#0A263C; font-size:20px; margin:0; }
 .onepagecheckout-window .content { padding: 7px; overflow: auto; }
 .onepagecheckout-window .close { position: absolute; top: -15px; right: -16px; width: 16px; height: 16px; background: url(../images/onepagecheckout/cancel_round.png) no-repeat 50% 50%; }
@@ -187,19 +176,85 @@ p.newsletter label{color:#8E8D8B;}
 /* IE7 fix */
 *:first-child+html .onepagecheckout-window { width: 500px; }
 
+#onepagecheckout_loginbox #login-form .boxcontent input,
+#onepagecheckout_forgotbox #forgot-password-form .boxcontent input{width:98%;}
+.my-cart-link{float:right; color: #0B3A96; font-weight: bold; font-size:12px !important; text-decoration:none;}
 
-/* consent form */
-.iwdav_modal{width:700px;border:2px solid #777; background-color:#fff;position:absolute;top:600px;z-index:10000;}
-.iwdav_modal_mobile{position:relative; left:auto !important;top:0px;width:98% !important;height:auto !important;margin:10px auto;}
-.iwdav_modal .container{background:transparent;margin: 5px;padding:15px 10px 0px;color:#000;}
-.iwdav_modal_mobile .container{height:auto !important;}
-.iwdav_modal .container h3{color:#348DBC;font-size:20px;}
-.iwdav_modal .container p, .iwdav_modal .container{color:#000; font-size:13px;line-height: 1.45em;}
-.iwdav_modal .container .form-list label.required{font-weight:bold;color:#000;}
-.iwdav_modal .container .form-list label.requied em{color: #EB340A;float: right;font-style: normal;position: absolute;right: -8px;top: 0;}
-.iwdav_modal .container em{color: #EB340A;}
-.iwdav_modal .buttons-set .required{color:#EB340A;}
-.iwdav_modal .buttons-set{padding:10px 20px 20px;}
+/* modal form */
+.iwdav_modal{width:700px;border:4px solid #9e9e9e;background-color:#fff;position:absolute;top:600px;z-index:10000;
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+}
+.iwdav_modal_inner{border:1px solid #8b8a87;
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+border-radius: 4px;
+}
+.iwdav_modal_mobile{position:relative; left:auto !important;top:0px !important;width:98% !important;height:auto !important;margin:10px auto;}
+.iwdav_modal .iwd_container{background:transparent;margin: 5px;padding:15px 20px 0px;color:#000;}
+.iwdav_modal_mobile .iwd-container{height:auto !important;}
+
+.iwdav_modal .iwd_container p, .iwdav_modal .iwd_container{color:#343030;font-size:13px;line-height:18px;font-family:arial;}
+.iwdav_modal .iwd_container p{text-align:center;font-size:14px;}
+.iwdav_modal .iwd-buttons-set{padding:10px 20px 23px;margin:0 auto;text-align:center;}
+.iwdav_modal .iwd-buttons-set .iwd-button{
+border:1px solid #7b7475;
+-webkit-border-radius:5px;
+-moz-border-radius:5px;
+border-radius:5px;
+-webkit-box-shadow: inset 0px 0px 1px 1px rgba(191,191,185,1);
+-moz-box-shadow: inset 0px 0px 1px 1px rgba(191,191,185,1);
+box-shadow: inset 0px 0px 1px 1px rgba(191,191,185,1);	
+
+color:#fff;font-size:13px;font-weight:bold;text-align:center;line-height:27px;
+text-shadow:1px 1px #1a1a1a;padding:0 22px;text-transform:uppercase;cursor:pointer;
+
+	/* Mozilla Firefox */
+	background: -moz-linear-gradient(top, #8c8c8a, #6f6f6f) !important;
+	/* Webkit (Safari/Chrome 10) */
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#8c8c8a), to(#6f6f6f)) !important;
+	/* Webkit (Chrome 11+) */
+	background: -webkit-linear-gradient(top, #8c8c8a, #6f6f6f) !important;
+	/* Opera */ 
+	background: -o-linear-gradient(top, #8c8c8a, #6f6f6f) !important;
+	/* W3C Markup, IE10 Release Preview */
+	background: linear-gradient(to bottom, #8c8c8a, #6f6f6f) !important;
+	/* IE10 Consumer Preview */
+	background: -ms-linear-gradient(top, #8c8c8a 0%, #6f6f6f 100%) !important;
+
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8c8c8a', endColorstr='#6f6f6f',GradientType=0 ) !important; /* IE6-9 */
+}
+.iwdav_modal .iwd-buttons-set .iwd-button:hover{
+	/* Mozilla Firefox */
+	background: -moz-linear-gradient(top, #5f5f5f, #3f3f3f) !important;
+	/* Webkit (Safari/Chrome 10) */
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#5f5f5f), to(#3f3f3f)) !important;
+	/* Webkit (Chrome 11+) */
+	background: -webkit-linear-gradient(top, #5f5f5f, #3f3f3f) !important;
+	/* Opera */ 
+	background: -o-linear-gradient(top, #5f5f5f, #3f3f3f) !important;
+	/* W3C Markup, IE10 Release Preview */
+	background: linear-gradient(to bottom, #5f5f5f, #3f3f3f) !important;
+	/* IE10 Consumer Preview */
+	background: -ms-linear-gradient(top, #5f5f5f 0%, #3f3f3f 100%) !important;
+
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5f5f5f', endColorstr='#3f3f3f',GradientType=0 ) !important; /* IE6-9 */
+}
+
+.iwd-verification-title{padding:1px;}
+
+.iwd-verification-title .iwd-head{
+    line-height: 14px;
+    background-color:#e8e7e3;
+    padding: 13px 18px;
+	text-align:left;
+	margin:0;
+	font-size:18px;
+	color:#343030;
+	font-weight:bold;
+	font-family:arial;
+}
 
 .va_label{float:left;width:155px;}
 .va_choice{float:left;}
@@ -208,6 +263,12 @@ p.newsletter label{color:#8E8D8B;}
 
 .iwdavPopupOverlay{position:absolute;width:0px;height:0px;top:0px;left:0px;opacity:0.3;z-index:9998;background-color:rgb(0, 0, 0);
 filter: alpha(opacity = 30);-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";-moz-opacity: 0.3;-khtml-opacity: 0.3;}
+
+
+
+
+
+
 
 #onepagecheckout_loginbox #login-form .boxcontent input,
 #onepagecheckout_forgotbox #forgot-password-form .boxcontent input{width:98%;}

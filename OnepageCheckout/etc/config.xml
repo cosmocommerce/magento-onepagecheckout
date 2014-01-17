@@ -2,7 +2,7 @@
 <config>
     <modules>
         <IWD_OnepageCheckout>
-            <version>2.2.1</version>
+            <version>2.2.12</version>
         </IWD_OnepageCheckout>
     </modules>
 
@@ -128,9 +128,8 @@
                     </children>
                 </admin>
             </resources>
-        </acl> 
+        </acl>
     </adminhtml>
-
     <default>
         <onepagecheckout>
             <general>

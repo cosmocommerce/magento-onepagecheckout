@@ -745,6 +745,8 @@ class IWD_OnepageCheckout_IndexController extends Mage_Checkout_Controller_Actio
 
             Mage::getSingleton('customer/session')->setOrderCustomerComment($this->getRequest()->getPost('order-comment'));
 
+			$this->getOnepagecheckout()->getQuote()->setCustomerNote($this->getRequest()->getPost('order-comment'));
+
             if (!isset($result['redirect']) && !isset($result['error']))
             {
             	$pmnt_data = $this->getRequest()->getPost('payment', false);

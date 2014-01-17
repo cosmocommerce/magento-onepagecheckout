@@ -203,15 +203,60 @@ abstract class UpsAPI {
 	public function sendRequest($request_xml, $return_raw_xml = false) {
 		include_once('XML/Unserializer.php');
 		
-		// create the context stream and make the request
-		$context = stream_context_create(array(
-			'http' => array(
-				'method' => 'POST',
-				'header' => 'Content-Type: text/xml',
-				'content' => $request_xml,
-			),
-		));
-		$response = file_get_contents($this->server, false, $context);
+		$response = false;
+
+		$f_open = ini_get('allow_url_fopen');
+		if(!empty($f_open) && $f_open != 'Off')
+		{
+			// create the context stream and make the request
+			$context = stream_context_create(array(
+				'http' => array(
+					'method' => 'POST',
+					'header' => 'Content-Type: text/xml',
+					'content' => $request_xml,
+				),
+			));
+			$response = file_get_contents($this->server, false, $context);
+		}
+		else // use cURL
+		{
+			// init cURL
+	      	$ch = curl_init();
+	    	
+			$CURL_OPTS = array(
+			    CURLOPT_CONNECTTIMEOUT => 30,
+			    CURLOPT_RETURNTRANSFER => true,
+			    CURLOPT_TIMEOUT        => 60,
+			    CURLOPT_FRESH_CONNECT  => 1,
+			    CURLOPT_USERAGENT      => 'ups-php',
+			    CURLOPT_FOLLOWLOCATION => true,
+				CURLOPT_RETURNTRANSFER => true,
+			  );
+	
+	    	$opts = $CURL_OPTS;
+			$opts[CURLOPT_POSTFIELDS] = $request_xml;
+	    	$opts[CURLOPT_URL] = $this->server;
+	    	$opts[CURLOPT_SSL_VERIFYPEER] 	= 0;
+	    	$opts[CURLOPT_SSL_VERIFYHOST]	= 0;
+			
+			// set options
+			curl_setopt_array($ch, $opts);
+	
+			// execute
+			$curl_response = curl_exec($ch);
+		    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		    if($httpCode == 200)
+		    {
+	    		$hlength  = curl_getinfo($handle, CURLINFO_HEADER_SIZE);
+				$response = substr($curl_response, $hlength);
+		    }
+			
+			// close
+			curl_close($ch);
+		}
+		
+		if(empty($response))
+			return array();
 
 		// TODO: remove array creation after switching over to xpath
 		// create an array from the raw XML data

@@ -46,12 +46,13 @@ if(Mage::helper('onepagecheckout')->isAddressVerificationEnabled()):
 		}
 	}
 ?>
+<div class='iwdav_modal_inner'>
 <div class='iwd-verification-title'>
-	<div class="head">
-		<h3><?php echo $av_msg;?></h3>
+	<div class="iwd-head">
+		<?php echo $av_msg;?>
 	</div>
 </div>
-<div class="container onepagecheckout">
+<div class="iwd_container">
 <?php 
 	$candidates_exists	= false;
 
@@ -210,7 +211,9 @@ if(Mage::helper('onepagecheckout')->isAddressVerificationEnabled()):
 
     <div style='clear:both;'></div>
 </div>
-<div class="buttons-set" id="consent-buttons-container" style='text-align:right;'>
-	<button type="button" title="<?php echo $this->__('Continue') ?>" class="button" onclick="continue_verification()"><span><span><?php echo $this->__('Continue') ?></span></span></button>
+<div class="iwd-buttons-set" id="consent-buttons-container">
+	<button type="button" title="<?php echo $this->__('Continue') ?>" class="iwd-button" onclick="continue_verification()"><?php echo $this->__('Continue') ?></button>
+</div>
+
 </div>
 <?php endif;?>

@@ -112,6 +112,8 @@ $browser  = $_SERVER ['HTTP_USER_AGENT'];
   		});
     	
     	el.show();
+    	<?php else:?>
+    	$('onepagecheckout_orderform').hide(); // hide form for mobile devices 
     	<?php endif;?>
     }
     function close_verification()
@@ -119,6 +121,8 @@ $browser  = $_SERVER ['HTTP_USER_AGENT'];
     	<?php $is_mobile	= Mage::helper('onepagecheckout')->isMobile();
     	if(!$is_mobile):?>        
 		$("iwdavPopupOverlay").hide();
+		<?php else:?>
+		$('onepagecheckout_orderform').show(); // show form for mobile devices
 		<?php endif;?>
 		$('address-verification-results').hide();
 	}
