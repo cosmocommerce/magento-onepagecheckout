@@ -18,13 +18,13 @@
         </div>
     </div>
 <?php endif; ?>
-    <div class="short name-firstname">
-        <label for="<?php echo $this->getFieldId('firstname')?>" class="required">
-        	<?php echo $this->__('First Name') ?>
+    <div class="short name-lastname">
+        <label for="<?php echo $this->getFieldId('lastname')?>" class="required">
+        	<?php echo $this->__('Last Name') ?>
         </label>
         <sup>*</sup>
         <div class="data_area">
-            <input type="text" id="<?php echo $this->getFieldId('firstname')?>" name="<?php echo $this->getFieldName('firstname')?>" value="<?php echo $this->htmlEscape($this->getObject()->getFirstname()) ?>" title="<?php echo $this->__('First Name') ?>" class="t1 required-entry" <?php echo $this->getFieldParams() ?> />
+            <input type="text" id="<?php echo $this->getFieldId('lastname')?>" name="<?php echo $this->getFieldName('lastname')?>" value="<?php echo $this->htmlEscape($this->getObject()->getLastname()) ?>" title="<?php echo $this->__('Last Name') ?>" class="t1 required-entry" <?php echo $this->getFieldParams() ?> />
         </div>
     </div>
 <?php if ($this->showMiddlename()): ?>
@@ -35,13 +35,13 @@
         </div>
     </div>
 <?php endif; ?>
-    <div class="short name-lastname">
-        <label for="<?php echo $this->getFieldId('lastname')?>" class="required">
-        	<?php echo $this->__('Last Name') ?>
+    <div class="short name-firstname">
+        <label for="<?php echo $this->getFieldId('firstname')?>" class="required">
+        	<?php echo $this->__('First Name') ?>
         </label>
         <sup>*</sup>
         <div class="data_area">
-            <input type="text" id="<?php echo $this->getFieldId('lastname')?>" name="<?php echo $this->getFieldName('lastname')?>" value="<?php echo $this->htmlEscape($this->getObject()->getLastname()) ?>" title="<?php echo $this->__('Last Name') ?>" class="t1 required-entry" <?php echo $this->getFieldParams() ?> />
+            <input type="text" id="<?php echo $this->getFieldId('firstname')?>" name="<?php echo $this->getFieldName('firstname')?>" value="<?php echo $this->htmlEscape($this->getObject()->getFirstname()) ?>" title="<?php echo $this->__('First Name') ?>" class="t1 required-entry" <?php echo $this->getFieldParams() ?> />
         </div>
     </div>
 <?php if ($this->showSuffix()): ?>
