@@ -1,12 +1,7 @@
 magento-onepagecheckout
 =======================
 
-
-
-changelog 14-01-17
-merged from version 2.1.12
-
-based on iwd_onepagecheckout 2.1.1
+based on iwd_onepagecheckout-3.2.4
 
 because we are difficule to visit http://www.iwdextensions.com/magento-one-step-checkout-module.html in china. It's faster to host a module on github
 
