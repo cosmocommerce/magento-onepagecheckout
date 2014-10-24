@@ -1,9 +1,16 @@
 <?xml version="1.0"?>
-<config> 
+<config>
+	<tabs>
+		<iwdall>
+			<label>IWD Extensions</label>
+			<sort_order>210</sort_order>
+			<class>iwd-block</class>
+		</iwdall>
+	</tabs>
 	<sections>
-		<opc translate="label" module="opc">
+		<opc translate="label" module="contacts">
 			<label>One Page Checkout</label>
-			<tab>sales</tab>
+			<tab>iwdall</tab>
 			<frontend_type>text</frontend_type>
 			<sort_order>100</sort_order>
 			<show_in_default>1</show_in_default>

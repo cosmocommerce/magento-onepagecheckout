@@ -24,8 +24,10 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
+
 <?php echo $this->getChildHtml('items_before'); ?>
 <div id="checkout-review-table-wrapper">
+    <h3 class="review-title"><?php echo $this->__('Review Your Order')?></h3>
     <table class="opc-data-table" id="checkout-review-table">
         <?php if ($this->helper('tax')->displayCartBothPrices()): $colspan = $rowspan = 2; else: $colspan = $rowspan = 1; endif; ?>
         <col />
@@ -78,7 +80,7 @@
     </div>
     <script type="text/javascript">
     //<![CDATA[
-    review = new Review('<?php echo $this->getUrl('checkout/onepage/saveOrder', array('form_key' => Mage::getSingleton('core/session')->getFormKey())) ?>', '<?php echo $this->getUrl('checkout/onepage/success') ?>', $('checkout-agreements'));
+    review = new Review('<?php echo $this->getUrl('checkout/onepage/saveOrder', array('form_key' => Mage::getSingleton('core/session')->getFormKey(), '_secure' => $this->getRequest()->isSecure())) ?>', '<?php echo $this->getUrl('checkout/onepage/success') ?>', $('checkout-agreements'));
     //]]>
     </script>
 </div>

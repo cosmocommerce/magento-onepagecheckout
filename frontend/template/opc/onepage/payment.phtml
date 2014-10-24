@@ -2,12 +2,12 @@
 //<![CDATA[
     var quoteBaseGrandTotal = <?php echo (float)$this->getQuoteBaseGrandTotal(); ?>;
     var checkQuoteBaseGrandTotal = quoteBaseGrandTotal;
-    var payment = new Payment('co-payment-form', '<?php echo $this->getUrl('checkout/onepage/savePayment') ?>');
+    var payment = new Payment('co-payment-form', '<?php echo $this->getUrl('checkout/onepage/savePayment', array('_secure' => $this->getRequest()->isSecure())) ?>');
     var lastPrice;
 //]]>
 </script>
 <form action="" id="co-payment-form">	
-    <fieldset>
+    <fieldset id="checkout-payment-method-load">
         <?php echo $this->getChildHtml('methods') ?>
     </fieldset>
 </form>

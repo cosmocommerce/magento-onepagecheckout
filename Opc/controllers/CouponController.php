@@ -2,7 +2,8 @@
 
 class IWD_Opc_CouponController extends Mage_Core_Controller_Front_Action{
 
-	
+	const XML_PATH_DEFAULT_PAYMENT = 'opc/default/payment';
+
 	/**
 	 * Retrieve shopping cart model object
 	 *
@@ -31,6 +32,35 @@ class IWD_Opc_CouponController extends Mage_Core_Controller_Front_Action{
 	}
 	
 	
+	/**
+	 * Get payments method step html
+	 *
+	 * @return string
+	 */
+	protected function _getPaymentMethodsHtml($use_method = false){
+	
+		/** UPDATE PAYMENT METHOD **/
+		// check what method to use
+		$apply_method = Mage::getStoreConfig(self::XML_PATH_DEFAULT_PAYMENT);
+		if($use_method)
+			$apply_method = $use_method;
+		
+		$_cart = $this->_getCart();
+		$_quote = $_cart->getQuote();
+		$_quote->getPayment()->setMethod($apply_method);
+		$_quote->setTotalsCollectedFlag(false)->collectTotals();
+		$_quote->save();
+	
+		$layout = $this->getLayout();
+		$update = $layout->getUpdate();
+		$update->load('checkout_onepage_paymentmethod');
+		$layout->generateXml();
+		$layout->generateBlocks();
+		
+		$output = $layout->getOutput();
+		return $output;
+	}
+	
 	public function couponPostAction(){
 		
 		$responseData = array();
@@ -55,13 +85,19 @@ class IWD_Opc_CouponController extends Mage_Core_Controller_Front_Action{
 			return;
 		}
 	
+		/// get list of available methods before discount changes
+		$methods_before = Mage::helper('opc')->getAvailablePaymentMethods();
+		///////
+
 		try {
 			$this->_getQuote()->getShippingAddress()->setCollectShippingRates(true);
 			$this->_getQuote()->setCouponCode(strlen($couponCode) ? $couponCode : '')
 				->collectTotals()
 				->save();
 	
-			
+			/// get list of available methods after discount changes
+			$methods_after = Mage::helper('opc')->getAvailablePaymentMethods();
+			///////
 			
 			if ($couponCode) {
 				if ($couponCode == $this->_getQuote()->getCouponCode()) {
@@ -77,6 +113,13 @@ class IWD_Opc_CouponController extends Mage_Core_Controller_Front_Action{
 			$block = $layout->createBlock('checkout/cart_coupon');
 			$block->setTemplate('opc/onepage/coupon.phtml');
 			$responseData['coupon'] = $block->toHtml();
+			
+			// check if need to reload payment methods
+			$use_method = Mage::helper('opc')->checkUpdatedPaymentMethods($methods_before, $methods_after);
+			if($use_method != -1)
+				$responseData['payments'] = $this->_getPaymentMethodsHtml($use_method);
+			/////
+			
 		} catch (Mage_Core_Exception $e) {
 			$this->_getSession()->addError($e->getMessage());
 		} catch (Exception $e) {

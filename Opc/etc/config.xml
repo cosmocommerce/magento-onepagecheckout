@@ -2,7 +2,7 @@
 <config>
 	<modules>
         <IWD_Opc>
-            <version>3.2.4</version>
+            <version>3.4.7</version>
         </IWD_Opc>
 	</modules>
 	
@@ -176,6 +176,13 @@
                     <onepage_link>IWD_Opc_Block_Onepage_Link</onepage_link>                   
                 </rewrite>
             </checkout>
+            
+            <paypal>
+				<rewrite>
+					<standard_form>IWD_Opc_Block_Paypal_Standard_Form</standard_form>
+					<express_form>IWD_Opc_Block_Paypal_Express_Form</express_form>
+				</rewrite>
+			</paypal>
             
         </blocks>
     </global>

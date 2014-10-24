@@ -1,5 +1,5 @@
 <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
-<p class="text-login"><?php echo $this->__('Already registered?') ?> <a class="login-trigger" data-modal="modal-login"><?php echo $this->__('LOGIN HERE')?></a></p>
+<p class="left"><a class="login-trigger signin-modal" data-modal="modal-login"><?php echo $this->__('LOGIN')?></a></p>
 
 <div class="md-modal md-effect-7" id="modal-login">
 	<div class="md-content">
@@ -52,6 +52,6 @@
         var dataForm1 = new VarienForm('login-form', true);
     //]]>
 </script>
-<div class="clear move-columns"></div>
+
 
 

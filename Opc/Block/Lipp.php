@@ -12,7 +12,7 @@ class IWD_Opc_Block_Lipp extends  Mage_Core_Block_Template{
 			$secure = true;
 		}
 		$config['baseUrl'] = Mage::getBaseUrl('link', $secure);
-		$config['paypalexpress'] = Mage::helper('opc')->getPayPalExpressUrl();
+		$config['paypalexpress'] = Mage::getUrl('opses/express/start',array('_secure'=>$secure));
 		$config['paypalLightBoxEnabled'] = Mage::helper('opc')->getPayPalLightboxEnabled();
 		return Mage::helper ( 'core' )->jsonEncode ( $config );
 	}

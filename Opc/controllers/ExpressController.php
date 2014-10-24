@@ -41,8 +41,7 @@ class IWD_Opc_ExpressController extends  Mage_Core_Controller_Front_Action{
 	/**
 	 * Instantiate config
 	 */
-	protected function _construct()
-	{
+	protected function _construct(){
 		parent::_construct();
 		$this->_config = Mage::getModel($this->_configType, array($this->_configMethod));
 	}
@@ -50,12 +49,16 @@ class IWD_Opc_ExpressController extends  Mage_Core_Controller_Front_Action{
 	/**
 	 * Start Express Checkout by requesting initial token and dispatching customer to PayPal
 	 */
-	public function startAction()
-	{
+	public function startAction(){
 		$responseData = array();
 		try {
 			
-			
+			$_scheme = Mage::app()->getRequest()->getScheme();
+			if ($_scheme=='https'){
+				$_secure = true;
+			}else{
+				$_secure = false;
+			}
 			
 			$this->_initCheckout();
 	
@@ -72,58 +75,44 @@ class IWD_Opc_ExpressController extends  Mage_Core_Controller_Front_Action{
 			}
 	
 			// billing agreement
-			$isBARequested = (bool)$this->getRequest()
-			->getParam(Mage_Paypal_Model_Express_Checkout::PAYMENT_INFO_TRANSPORT_BILLING_AGREEMENT);
+			$isBARequested = (bool)$this->getRequest()->getParam(Mage_Paypal_Model_Express_Checkout::PAYMENT_INFO_TRANSPORT_BILLING_AGREEMENT);
 			if ($customer && $customer->getId()) {
 				$this->_checkout->setIsBillingAgreementRequested($isBARequested);
 			}
 	
 			// giropay
 			$this->_checkout->prepareGiropayUrls(
-					Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_LINK, true) . 'checkout/onepage/success',
-					Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_LINK, true),
-					Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_LINK, true) . 'checkout/onepage/success'
+					Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_LINK, $_secure) . 'checkout/onepage/success',
+					Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_LINK, $_secure),
+					Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_LINK, $_secure) . 'checkout/onepage/success'
 			);
 	
 			$token = $this->_checkout->start(
-							Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_LINK, true) . 'onepage/express/return', 
-							Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_LINK, true) . 'onepage/express/cancel'
+							Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_LINK, $_secure) . 'onepage/express/return', 
+							Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_LINK, $_secure) . 'onepage/express/cancel'
 			);
 			
-			$url = $this->getRequest()->getParam('redirect', false);
-			if ($url){
-				Mage::getSingleton('core/session')->setExpressRedirect($url);
-			}else{
-				Mage::getSingleton('core/session')->setExpressRedirect('checkout/cart');
-			}
+			$this->_initToken($token);
 			
-			if ($token && $url = $this->_checkout->getRedirectUrl()) {
-				$this->_initToken($token);
-				
-				$responseData['error'] = false;
-				$responseData['token'] = $token;
-				
-				
-			}
+			$paypalUrl =  Mage::helper('opc')->getPayPalExpressUrl($token);
+			
+			$this->_redirectUrl($paypalUrl);
+		
 		} catch (Mage_Core_Exception $e) {
-			$responseData['error'] = true;
-			$responseData['message'] = $e->getMessage();
+			$this->_getSession()->addError($e->getMessage());
 		} catch (Exception $e) {
-			$responseData['error'] = true;
-			$responseData['message'] = $this->__('Unable to start Express Checkout.');
+			$this->_getSession()->addError($this->__('Unable to start Express Checkout.'));
 			Mage::logException($e);
 		}
 	
-		$this->getResponse()->setHeader('Content-type','application/json', true);
-		$this->getResponse()->setBody(Mage::helper('core')->jsonEncode($responseData));
+		
 	}
 	
 	
 	/**
 	 * Cancel Express Checkout
 	 */
-	public function cancelAction()
-	{
+	public function cancelAction(){
 		try {
 			$this->_initToken(false);
 			// TODO verify if this logic of order cancelation is deprecated
@@ -149,16 +138,15 @@ class IWD_Opc_ExpressController extends  Mage_Core_Controller_Front_Action{
 			Mage::logException($e);
 		}
 	
-		$url = Mage::getSingleton('core/session')->getExpressRedirect();
-		echo "<script>parent.parent.location.href='" . Mage::getUrl($url, array('_secure'=>true)) . "'</script>";
+		
+		$this->_redirect('checkout/cart', array('_secure'=>true));
 		
 	}
 	
 	/**
 	 * Return from PayPal and dispatch customer to order review page
 	 */
-	public function returnAction()
-	{
+	public function returnAction(){
 		try {
 			$this->_initCheckout();
 			$this->_checkout->returnFromPaypal($this->_initToken());
@@ -173,7 +161,7 @@ class IWD_Opc_ExpressController extends  Mage_Core_Controller_Front_Action{
 			Mage::getSingleton('checkout/session')->addError($this->__('Unable to process Express Checkout approval.'));
 			Mage::logException($e);
 		}
-		echo "<script>parent.parent.location.href='" . Mage::getUrl('checkout/cart', array('_secure'=>true)) . "'</script>";
+		$this->_redirect('checkout/cart', array('_secure'=>true));	
 	}
 	
 
@@ -182,8 +170,7 @@ class IWD_Opc_ExpressController extends  Mage_Core_Controller_Front_Action{
 	 * Instantiate quote and checkout
 	 * @throws Mage_Core_Exception
 	 */
-	private function _initCheckout()
-	{
+	private function _initCheckout(){
 		$quote = $this->_getQuote();
 		if (!$quote->hasItems() || $quote->getHasError()) {
 			$this->getResponse()->setHeader('HTTP/1.1','403 Forbidden');
@@ -202,8 +189,7 @@ class IWD_Opc_ExpressController extends  Mage_Core_Controller_Front_Action{
 	 * @param string $setToken
 	 * @return Mage_Paypal_ExpressController|string
 	 */
-	protected function _initToken($setToken = null)
-	{
+	protected function _initToken($setToken = null){
 		if (null !== $setToken) {
 			if (false === $setToken) {
 				// security measure for avoid unsetting token twice
@@ -231,8 +217,7 @@ class IWD_Opc_ExpressController extends  Mage_Core_Controller_Front_Action{
 	 *
 	 * @return Mage_PayPal_Model_Session
 	 */
-	private function _getSession()
-	{
+	private function _getSession(){
 		return Mage::getSingleton('paypal/session');
 	}
 	
@@ -241,8 +226,7 @@ class IWD_Opc_ExpressController extends  Mage_Core_Controller_Front_Action{
 	 *
 	 * @return Mage_Checkout_Model_Session
 	 */
-	private function _getCheckoutSession()
-	{
+	private function _getCheckoutSession(){
 		return Mage::getSingleton('checkout/session');
 	}
 	
@@ -251,8 +235,7 @@ class IWD_Opc_ExpressController extends  Mage_Core_Controller_Front_Action{
 	 *
 	 * @return Mage_Sale_Model_Quote
 	 */
-	private function _getQuote()
-	{
+	private function _getQuote(){
 		if (!$this->_quote) {
 			$this->_quote = $this->_getCheckoutSession()->getQuote();
 		}

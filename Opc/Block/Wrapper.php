@@ -22,8 +22,7 @@ class IWD_Opc_Block_Wrapper extends  Mage_Core_Block_Template{
 	protected function _getReviewHtml(){
 		//clear cache aftr change collection - if no magento can't find product in review block
 		Mage::app()->getCacheInstance()->cleanType('layout');
-		
-	
+
 		$layout = $this->getLayout();
 		$update = $layout->getUpdate();
 		$update->load('checkout_onepage_review');
@@ -45,15 +44,24 @@ class IWD_Opc_Block_Wrapper extends  Mage_Core_Block_Template{
 		$config = array ();
 		$params = array (
 				'_secure' => true
-		);	
-		$config['baseUrl'] = Mage::getBaseUrl('link', true);
-		$config['isLoggedIn'] = (int) Mage::getSingleton('customer/session')->isLoggedIn();
+		);
 		
-		$config['geoCountry'] =  Mage::getStoreConfig(self::XML_PATH_GEO_COUNTRY) ? Mage::helper('opc/country')->get() : false;
-		$config['geoCity'] =  Mage::getStoreConfig(self::XML_PATH_GEO_CITY) ? Mage::helper('opc/city')->get() : false;
+		$base_url = Mage::getBaseUrl('link', true);
+
+		// protocol for ajax urls should be the same as for current page
+		$http_protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS']==='on')?'https':'http';
+		if ($http_protocol == 'https')
+			$base_url = str_replace('http:', 'https:', $base_url);
+		else
+			$base_url = str_replace('https:', 'http:', $base_url);
+		//////
+
+		$config['baseUrl'] = $base_url;
+		$config['isLoggedIn'] = (int) Mage::getSingleton('customer/session')->isLoggedIn();
 		$config['comment'] = Mage::helper('opc')->isShowComment();
-		$config['paypalexpress'] = Mage::helper('opc')->getPayPalExpressUrl();
 		$config['paypalLightBoxEnabled'] = Mage::helper('opc')->getPayPalLightboxEnabled();
+
+		$config['agree_error'] = $this->__('Please agree to all the terms and conditions before placing the order.');
 		
 		return Mage::helper ( 'core' )->jsonEncode ( $config );
 	}

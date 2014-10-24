@@ -9,7 +9,7 @@
         </reference>
 		<!--  LOGIN WITH PAYPAL -->
         <reference name="head">
-            <action method="addJs" ifconfig="opc/paypallogin/status"><script>iwd/opc/login.js</script></action>
+        	<action method="addItem" ifconfig="opc/paypallogin/status"><type>skin_js</type><name>js/iwd/opc/login.js</name></action>            
             <action method="addItem" ifconfig="opc/paypallogin/status"><type>skin_css</type><name>css/iwd/opc/paypal.css</name><params/></action>
         </reference>
 	</default>
@@ -22,24 +22,34 @@
         </reference>
         
         <reference name="head">		
-			<action method="addJs"><script>iwd/opc/checkout.js</script></action>
-			<action method="addJs"><script>iwd/opc/extend.js</script></action>
-			<action method="addItem"><type>skin_js</type><name>js/opcheckout.js</name></action>					
+        	<action method="addItem"><type>skin_js</type><name>js/iwd/opc/checkout.js</name></action>
+        	<action method="addItem"><type>skin_js</type><name>js/iwd/opc/extend.js</name></action>
+        	<action method="addJs"><file>mage/directpost.js</file></action>        
+			<action method="addItem"><type>skin_js</type><name>js/opcheckout.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>js/iwd/opc/lipp.js</name></action>
             <action method="addCss"><stylesheet>css/iwd/opc/opc.css</stylesheet></action>
 		</reference>
         
         <reference name="content">
 			<block type="opc/wrapper" name="es.checkout.container" template="opc/wrapper.phtml">
 			
+					 <block type="page/html_wrapper" name="paypal.button" translate="label">
+		                <label>PayPal Express Checkout Shortcut Wrapper</label>
+		                <block type="paypal/express_shortcut" name="product.info.addtocart.paypal" template="opc/paypal/express/shortcut.phtml">
+		                    <!-- action method="setIsInCatalogProduct"><value>1</value></action -->
+		                </block>
+		            </block>
+			
+			
 					<!--  LOGIN FORM  -->
 					<block type="opc/onepage_login" name="checkout.onepage.login" as="login" template="opc/onepage/login.phtml">
 						<block type="customer/account_forgotpassword" name="forgotPassword" template="opc/customer/form/forgotpassword.phtml"/>	
 					</block>
 				 	<!-- BILLING FORM -->
-                    <block type="checkout/onepage_billing" name="checkout.onepage.billing" as="billing" template="opc/onepage/billing.phtml"/>
+                    <block type="opc/onepage_billing" name="checkout.onepage.billing" as="billing" template="opc/onepage/billing.phtml"/>
 
                     <!-- SHIPPING FORM -->
-                    <block type="checkout/onepage_shipping" name="checkout.onepage.shipping" as="shipping" template="opc/onepage/shipping.phtml"/>
+                    <block type="opc/onepage_shipping" name="checkout.onepage.shipping" as="shipping" template="opc/onepage/shipping.phtml"/>
                     
                     <!-- COUPON FORM -->
                     <block type="checkout/cart_coupon" name="checkout.cart.coupon" as="coupon" template="opc/onepage/coupon.phtml"/>
@@ -60,7 +70,8 @@
 	                    </block>
                 	</block>
                 	
-                	
+                	<block type="checkout/agreements" name="checkout.onepage.agreements" as="agreements" template="opc/onepage/agreements.phtml"/>
+					<block type="opc/onepage_subscribed" template="opc/onepage/review/subscribed.phtml" name="opc.newsletters" /> 
                     
 			</block>
         </reference>
@@ -72,23 +83,14 @@
 	</opc_index_index>		
 	
 	<checkout_onepage_review>
-		<reference name="checkout.onepage.review.button">
-			<action method="setTemplate" ifconfig="opc/global/status"><template>opc/onepage/review/button.phtml</template></action>
-		</reference>
-		
-		<reference name="checkout.onepage.agreements">
-			<action method="setTemplate"  ifconfig="opc/global/status"><template>opc/onepage/agreements.phtml</template></action>
-		</reference>
-				
-		<reference name="root">
-			<block type="opc/onepage_subscribed" template="opc/onepage/review/subscribed.phtml" name="opc.newsletters"/>			
-		</reference>		
+		<remove name="checkout.onepage.review.button" />
+		<remove name="checkout.onepage.agreements" />		
 	</checkout_onepage_review>
 	
 	<!--  PAYPAL EXPRESS LIGHTBOX -->
 	<checkout_cart_index>
-	 	<reference name="head">		
-			<action method="addJs"><script>iwd/opc/lipp.js</script></action>				
+	 	<reference name="head">					
+			<action method="addItem"><type>skin_js</type><name>js/iwd/opc/lipp.js</name></action>    		
 		</reference>
 		<reference name="before_body_end">
 			<block type="opc/lipp" name="opc.lipp.js" as="" template="opc/lipp-js.phtml"></block>
@@ -110,8 +112,8 @@
     </customer_account_index>
 
     <customer_account_login>
-    	<reference name="head">
-            <action method="addJs" ifconfig="opc/paypallogin/status"><script>iwd/opc/login.js</script></action>
+    	<reference name="head">           
+            <action method="addItem" ifconfig="opc/paypallogin/status"><type>skin_js</type><name>js/iwd/opc/login.js</name></action>    	
         </reference>
         <reference name="customer_form_login">
             <action method="setTemplate"><template>opc/customer/form/login.phtml</template></action>
@@ -122,8 +124,8 @@
     </customer_account_login>
 
     <customer_account_create>
-    	<reference name="head">
-            <action method="addJs" ifconfig="opc/paypallogin/status"><script>iwd/opc/login.js</script></action>
+    	<reference name="head">            
+            <action method="addItem" ifconfig="opc/paypallogin/status"><type>skin_js</type><name>js/iwd/opc/login.js</name></action>
         </reference>
         <reference name="customer_form_register">
             <action method="setTemplate"><template>opc/customer/form/register.phtml</template></action>

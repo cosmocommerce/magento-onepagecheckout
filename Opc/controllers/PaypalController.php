@@ -20,7 +20,7 @@ class IWD_Opc_PaypalController extends Mage_Core_Controller_Front_Action{
 	
 		$_helper = $this->_getHelper ();
 		$_params = $this->getRequest()->getParams();
-		
+
 		try{
 				
 			if (isset($_params['code'])){

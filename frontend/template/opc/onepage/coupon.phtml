@@ -1,4 +1,4 @@
-<form id="opc-discount-coupon-form" action="<?php echo $this->getUrl('checkout/cart/couponPost') ?>" method="post">
+<form id="opc-discount-coupon-form" action="<?php echo $this->getUrl('checkout/cart/couponPost', array('_secure' => $this->getRequest()->isSecure())) ?>" method="post">
     <div class="discount">
         <div class="discount-form">
             <label for="coupon_code"><?php echo $this->__('Enter your coupon code:') ?></label>            
